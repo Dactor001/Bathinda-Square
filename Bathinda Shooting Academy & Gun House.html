@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bathinda Shooting Academy &amp; Gun House</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Unbounded:wght@500;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{color-scheme:dark;--bg:#0a0a0a;--fg:#f4f4f5;--mute:#9a9aa3;--ac:#4aa3ff;--gx:50%;--gy:50%;--gc:transparent;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Outfit,system-ui,sans-serif;overflow-x:hidden}
+body[data-v=house]{--ac:#d19a5b}
+.disp{font-family:Unbounded,Outfit,sans-serif;letter-spacing:-.03em}
+.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:24px}
+.ac{color:var(--ac)}
+.view{display:none}.view.on{display:block;animation:in .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes in{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+#home{transition:.7s cubic-bezier(.7,0,.3,1)}#home.zoom{transform:scale(2.6);opacity:0}
+.rv{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.2,.8,.2,1)}.rv.vis{opacity:1;transform:none}
+#glow{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .5s;background:radial-gradient(650px circle at var(--gx) var(--gy),var(--gc),transparent 65%)}
+#cur{position:fixed;left:0;top:0;width:280px;height:280px;margin:-140px 0 0 -140px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 65%);z-index:5;display:none}
+.orb{--c:#2f8cff;width:min(38vw,250px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center;text-align:center;cursor:pointer;transition:.4s;color:#fff;background:radial-gradient(circle at 30% 30%,var(--c),transparent 72%),#101010;box-shadow:0 0 40px -12px var(--c);animation:fl 6s ease-in-out infinite}
+.orb.h{--c:#c58a4a;animation-delay:-3s}
+.orb:hover,.orb:focus-visible{transform:scale(1.1);box-shadow:0 0 130px 10px var(--c);outline:0}
+@keyframes fl{50%{translate:0 -14px}}
+.nb{padding:.5rem .9rem;border-radius:999px;font-size:.85rem;color:var(--mute);transition:.25s}.nb.act,.nb:hover{color:#fff;background:rgba(255,255,255,.12)}
+.sol{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;transition:.3s}.sol:hover{background:var(--ac);color:#000;transform:translateY(-3px)}
+.bub{max-width:82%;padding:.55rem .9rem;border-radius:18px;font-size:.92rem;animation:in .3s}
+@media(pointer:fine){#cur{display:block}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-v="home" class="selection:bg-white/20">
+<canvas id="px" class="fixed inset-0 w-full h-full pointer-events-none"></canvas>
+<div id="glow"></div><div id="cur"></div>
+
+<header class="fixed left-1/2 -translate-x-1/2 z-40 glass !rounded-full px-2 py-1.5 flex gap-1 max-w-[94vw]" style="top:calc(env(safe-area-inset-top,0px) + 12px)">
+  <button class="nb act" data-go="home">Home</button><button class="nb" data-go="academy">Academy</button><button class="nb" data-go="house">Gun House</button>
+</header>
+
+<!-- HOME -->
+<main id="home" class="view on relative min-h-screen">
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-5 pt-24 pb-10">
+    <p class="text-xs tracking-[.4em] text-white/50 mb-4">TALWANDI SABO · BATHINDA · PUNJAB</p>
+    <h1 class="disp text-4xl sm:text-6xl font-extrabold mb-12">Choose your <span class="bg-gradient-to-r from-sky-400 to-amber-300 bg-clip-text text-transparent">range</span></h1>
+    <div class="flex gap-4 sm:gap-14">
+      <button class="orb a" data-go="academy" data-gc="rgba(47,140,255,.35)" data-hint="Olympic-grade 10m Air Rifle &amp; Air Pistol coaching for every age."><span class="disp text-sm sm:text-xl font-extrabold leading-tight px-2">BATHINDA<br>SHOOTING<br>ACADEMY</span></button>
+      <button class="orb h" data-go="house" data-gc="rgba(197,138,74,.35)" data-hint="Imported cartridges, fine firearms and a bespoke customization studio."><span class="disp text-sm sm:text-xl font-extrabold leading-tight px-2">BATHINDA<br>GUN<br>HOUSE</span></button>
+    </div>
+    <p id="hint" class="mt-12 h-6 text-white/70 text-sm sm:text-base transition">Hover an orb to preview · tap to enter</p>
+  </section>
+</main>
+
+<!-- ACADEMY -->
+<main id="academy" class="view relative">
+  <section class="min-h-[88vh] flex flex-col justify-center px-5 sm:px-10 max-w-6xl mx-auto pt-28 pb-16">
+    <p class="ac tracking-[.35em] text-xs mb-5 rv">OLYMPIC-STANDARD TRAINING</p>
+    <h2 class="disp text-5xl sm:text-8xl font-extrabold leading-[.95] rv">Precision is a <span class="ac">discipline.</span></h2>
+    <p class="mt-6 max-w-xl text-white/70 text-lg rv">Shooting has been an Olympic sport since 1896. At Bathinda Shooting Academy, young athletes learn stance, breath and trigger control on 10m Air Rifle and Air Pistol, with the calm focus that champions are built on.</p>
+    <div class="mt-8 flex gap-3 rv"><a href="#a-gal" class="px-6 py-3 rounded-full bg-white text-black font-semibold">See training</a><a href="#a-chat" class="px-6 py-3 rounded-full glass">Ask a question</a></div>
+  </section>
+
+  <section id="a-gal" class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <h3 class="disp text-3xl sm:text-5xl font-extrabold mb-8 rv">Young <span class="ac">shooters</span></h3>
+    <div id="gal" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5"></div>
+  </section>
+
+  <section class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <h3 class="disp text-3xl sm:text-5xl font-extrabold mb-8 rv">Events &amp; <span class="ac">tournaments</span></h3>
+    <div id="ev" class="grid md:grid-cols-3 gap-5"></div>
+  </section>
+
+  <section id="a-chat" class="px-5 sm:px-10 max-w-6xl mx-auto py-16 grid md:grid-cols-2 gap-6">
+    <div class="glass p-6 sm:p-8 rv flex flex-col">
+      <h3 class="disp text-2xl font-extrabold mb-1">Inquiry chat</h3>
+      <p class="text-white/60 text-sm mb-4">Admissions, batches, fees, equipment — ask anything.</p>
+      <div id="msgs" class="flex-1 min-h-[200px] max-h-[300px] overflow-y-auto flex flex-col gap-2 mb-4"><div class="bub bg-white/10 self-start">Hi! 👋 How can we help you today?</div></div>
+      <form id="cf" class="flex gap-2"><input id="ci" required maxlength="400" placeholder="Type your inquiry…" class="flex-1 min-w-0 bg-white/10 rounded-full px-4 py-3 outline-none focus:ring-2 ring-sky-400 text-base"><button class="px-5 rounded-full bg-sky-500 text-black font-semibold">Send</button></form>
+    </div>
+    <div class="glass p-6 sm:p-8 rv flex flex-col justify-between gap-6">
+      <div><h3 class="disp text-2xl font-extrabold mb-3">Visit us</h3><p class="text-xl text-white/85">Opposite Seal Complex,<br>Talwandi Sabo, Bathinda, Punjab</p>
+      <a class="inline-block mt-4 ac underline underline-offset-4" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Opposite+Seal+Complex+Talwandi+Sabo+Bathinda">Open in Maps →</a></div>
+      <div class="soc"></div>
+    </div>
+  </section>
+</main>
+
+<!-- GUN HOUSE -->
+<main id="house" class="view relative">
+  <section class="min-h-[88vh] flex flex-col justify-center px-5 sm:px-10 max-w-6xl mx-auto pt-28 pb-16">
+    <p class="ac tracking-[.35em] text-xs mb-5 rv">FINE ARMS · IMPORTED · CUSTOM</p>
+    <h2 class="disp text-5xl sm:text-8xl font-extrabold leading-[.95] rv bg-gradient-to-b from-amber-100 via-[#d19a5b] to-[#6b4423] bg-clip-text text-transparent">Precision, forged.</h2>
+    <p class="mt-6 max-w-xl text-white/70 text-lg rv">Imported cartridges, fine firearms and a bespoke customization studio, under one roof in Talwandi Sabo.</p>
+    <p class="mt-6 max-w-xl text-xs text-white/45 rv">Sales strictly against a valid arms licence under the Arms Act, 1959. Catalogue is for information only; no online sales.</p>
+  </section>
+
+  <section class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <h3 class="disp text-3xl sm:text-5xl font-extrabold mb-8 rv">Imported <span class="ac">cartridges</span></h3>
+    <div class="glass overflow-x-auto rv"><div id="ct" class="min-w-[560px] text-sm sm:text-base"></div></div>
+  </section>
+
+  <section class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <h3 class="disp text-3xl sm:text-5xl font-extrabold mb-8 rv">Firearms <span class="ac">catalogue</span></h3>
+    <div id="gn" class="grid sm:grid-cols-2 gap-5"></div>
+  </section>
+
+  <section class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <p class="ac tracking-[.35em] text-xs mb-3 rv">CUSTOMIZATION STUDIO</p>
+    <h3 class="disp text-3xl sm:text-5xl font-extrabold mb-8 rv">Built around <span class="ac">you.</span></h3>
+    <div class="grid md:grid-cols-2 gap-5 items-stretch">
+      <div id="butt" class="group relative min-h-[300px] overflow-hidden rounded-3xl glass rv"></div>
+      <div class="glass p-6 sm:p-8 rv">
+        <h4 class="disp text-xl font-extrabold mb-4">Stock &amp; butt customization</h4>
+        <ul class="space-y-3 text-white/75">
+          <li><b class="text-white">Length-of-pull fitting:</b> spacers and butt-plate adjustment matched to your arm length and posture.</li>
+          <li><b class="text-white">Adjustable cheek-piece:</b> height and cast set for a repeatable, comfortable eye line.</li>
+          <li><b class="text-white">Grip &amp; palm-swell shaping:</b> hand-contoured for a secure, relaxed hold.</li>
+          <li><b class="text-white">Recoil pad &amp; finish:</b> premium pads, walnut or laminate stocks, and durable protective coatings.</li>
+        </ul>
+      </div>
+    </div>
+    <div id="mods" class="grid sm:grid-cols-2 gap-5 mt-5"></div>
+  </section>
+
+  <section class="px-5 sm:px-10 max-w-6xl mx-auto py-16">
+    <div class="glass p-6 sm:p-8 rv flex flex-col sm:flex-row sm:items-center justify-between gap-6"><div><h3 class="disp text-2xl font-extrabold mb-2">Visit the showroom</h3><p class="text-white/70">Same building as Bathinda Shooting Academy, opposite Seal Complex, Talwandi Sabo, Bathinda, Punjab.</p></div><div class="soc"></div></div>
+  </section>
+</main>
+
+<footer class="relative px-5 py-10 text-center text-xs text-white/40">© Bathinda Shooting Academy &amp; Bathinda Gun House · Talwandi Sabo, Punjab</footer>
+
+<script>
+/* ===== EDIT ME: replace sample content; set img:'https://…' to show real photos ===== */
+const CFG={inquiryEndpoint:'',
+ig:'https://www.instagram.com/bathinda_gunhouse?psln=cXNhaGswajcwank2&utm_source=qr',
+fb:'https://www.facebook.com/share/1EDgjP9MjB/?mibextid=wwXIfr'};
+const GAL=[{t:'10m Air Rifle · junior squad'},{t:'10m Air Pistol · stance drills'},{t:'Dry-fire fundamentals'},{t:'Coach review sessions'},{t:'Match-day focus'},{t:'Breath & trigger control'}];
+const EV=[{y:'20XX',n:'District Air Rifle Championship',d:'10m Air Rifle, youth and junior categories. Add event breakdown and highlights here.',m:'Medals: add tally'},
+{y:'20XX',n:'State Air Pistol Open',d:'10m Air Pistol, 60-shot match format. Add finals, qualifying scores and standout performances here.',m:'Medals: add tally'},
+{y:'20XX',n:'Junior Air Rifle Meet',d:'Entry-level competition to build match temperament in our youngest shooters.',m:'Medals: add tally'}];
+const CART=[['Cartridge','Bullet / load','Typical use','Price'],['.22 LR match','40 gr lead round-nose','Rimfire target','On request'],['.32 S&W Long wadcutter','98 gr lead wadcutter','Target pistol','On request'],['.30-06 Springfield','150–180 gr soft point','Rifle','On request'],['12 bore','28–36 g shot loads','Shotgun / clay','On request']];
+const GUNS=[{n:'Precision air pistol',c:'Imported · 10m',d:'Match-grade air pistol with adjustable grip and fine trigger.'},{n:'Competition air rifle',c:'Imported · 10m',d:'Precision air rifle with adjustable stock for junior and senior shooters.'},{n:'Target rimfire',c:'Imported · .22 LR',d:'Accurate rimfire platform for disciplined range work.'},{n:'Indian arms',c:'Licensed · domestic',d:'Trusted domestic makes, available against a valid licence.'}];
+const MODS=[{n:'Rifle modifications',d:'Stock bedding, optics mounting, trigger tuning and custom finishing.'},{n:'Pistol modifications',d:'Grip fitting, sight set-up, trigger tuning and refined finishes.'}];
+/* ===== ENGINE ===== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const art=(t,img,svg)=>img?`<img src="${img}" alt="${t}" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">`:svg||`<svg viewBox="0 0 100 100" class="absolute inset-0 m-auto w-1/3 opacity-30 transition duration-700 group-hover:scale-125 ac" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="16"/><circle cx="50" cy="50" r="3" fill="currentColor"/></svg>`;
+const card=(t,sub,img,cls='aspect-[4/3]')=>`<figure class="group relative ${cls} overflow-hidden rounded-3xl glass rv bg-gradient-to-br from-white/5 to-transparent">${art(t,img)}<figcaption class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/85 text-sm"><b>${t}</b>${sub?`<span class="block text-white/60">${sub}</span>`:''}</figcaption></figure>`;
+$('#gal').innerHTML=GAL.map(g=>card(g.t,'',g.img)).join('');
+$('#ev').innerHTML=EV.map(e=>`<article class="glass p-6 rv hover:-translate-y-1 transition"><p class="ac text-sm">${e.y}</p><h4 class="disp text-lg font-extrabold my-2">${e.n}</h4><p class="text-white/65 text-sm">${e.d}</p><p class="mt-4 text-sm font-semibold">🏅 ${e.m}</p></article>`).join('');
+$('#ct').innerHTML=CART.map((r,i)=>`<div class="grid grid-cols-4 gap-3 px-5 py-3.5 ${i?'border-t border-white/10 text-white/80':'ac text-xs tracking-widest uppercase'}">${r.map(c=>`<span>${c}</span>`).join('')}</div>`).join('');
+$('#gn').innerHTML=GUNS.map(g=>card(g.n,g.c+' · '+g.d,g.img,'aspect-[16/10]')).join('');
+$('#butt').innerHTML=art('Custom gun butt',null,'<svg viewBox="0 0 200 100" class="absolute inset-0 m-auto w-3/4 ac opacity-60 transition duration-700 group-hover:scale-110" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 30h110l30 8 36 6-6 34-40-6-24-10H10z"/><path d="M150 38v34M170 42v30" stroke-dasharray="3 4"/></svg>')+'<p class="absolute bottom-4 left-5 text-xs text-white/50">Your gun butt customization photo goes here</p>';
+$('#mods').innerHTML=MODS.map(m=>card(m.n,m.d,m.img,'aspect-[16/10]')).join('');
+const ic={ig:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',fb:'<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M14 8V6.5c0-.7.2-1 1.2-1H17V2h-2.6C11.5 2 10 3.700 10 6.200V8H8v3.500h2V22h4V11.500h2.600L17 8z"/></svg>'};
+$$('.soc').forEach(s=>s.innerHTML=`<div class="flex items-center gap-3"><span class="text-sm text-white/50 mr-1">Follow us</span><a class="sol glass" href="${CFG.ig}" target="_blank" rel="noopener" aria-label="Instagram">${ic.ig}</a><a class="sol glass" href="${CFG.fb}" target="_blank" rel="noopener" aria-label="Facebook">${ic.fb}</a></div>`);
+/* views */
+let cur='home';
+function go(id){if(id===cur)return;const from=$('#'+cur),to=$('#'+id);const swap=()=>{from.classList.remove('on','zoom');to.classList.add('on');scrollTo(0,0);cur=id;document.body.dataset.v=id;$('#glow').style.opacity=0;$$('.nb').forEach(b=>b.classList.toggle('act',b.dataset.go===id))};cur==='home'?(from.classList.add('zoom'),setTimeout(swap,650)):swap()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go)});
+/* orbs, glow, cursor */
+const hint=$('#hint'),def=hint.textContent;
+$$('.orb').forEach(o=>{const on=()=>{$('#glow').style.setProperty('--gc',o.dataset.gc);$('#glow').style.opacity=1;hint.textContent=o.dataset.hint.replace(/&amp;/g,'&')},off=()=>{$('#glow').style.opacity=0;hint.textContent=def};o.addEventListener('pointerenter',on);o.addEventListener('focus',on);o.addEventListener('pointerleave',off);o.addEventListener('blur',off)});
+addEventListener('pointermove',e=>{const r=document.documentElement.style;r.setProperty('--gx',e.clientX+'px');r.setProperty('--gy',e.clientY+'px');$('#cur').style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
+/* scroll reveal */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target)}}),{threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+/* inquiry chat */
+$('#cf').addEventListener('submit',async e=>{e.preventDefault();const i=$('#ci'),v=i.value.trim();if(!v)return;const m=$('#msgs');const add=(t,me)=>{const d=document.createElement('div');d.className='bub '+(me?'bg-sky-500 text-black self-end':'bg-white/10 self-start');d.textContent=t;m.appendChild(d);m.scrollTop=m.scrollHeight};add(v,1);i.value='';
+if(CFG.inquiryEndpoint){try{await fetch(CFG.inquiryEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:v})})}catch(_){}}
+setTimeout(()=>add('Thank you! Our team will get back to you shortly. You are also welcome to visit us opposite Seal Complex, Talwandi Sabo.'),700)});
+/* particles */
+(()=>{const c=$('#px'),x=c.getContext('2d');let w,h,P=[];const rs=()=>{w=c.width=innerWidth;h=c.height=innerHeight;P=Array.from({length:Math.min(70,w/14|0)},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,v:Math.random()*.25+.05}))};rs();addEventListener('resize',rs);
+(function t(){x.clearRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.35)';P.forEach(p=>{p.y-=p.v;if(p.y<0){p.y=h;p.x=Math.random()*w}x.beginPath();x.arc(p.x,p.y,p.r,0,7);x.fill()});requestAnimationFrame(t)})()})();
+</script>
+</body>
+</html>
